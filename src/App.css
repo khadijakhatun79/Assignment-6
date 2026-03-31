@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+body {
+    font-family: "Manrope", sans-serif;
+}
+
 .th-btn {
     position: relative;
     z-index: 2;
@@ -47,6 +53,43 @@
             transform: scaleX(1) scaleY(1);
         }
     }
+
+
+}
+
+.card {
+    position: relative;
+    z-index: 2;
+}
+
+.card .icon {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #F2F2F2;
+    padding: 13px;
+    border-radius: 50%;
+
+    img {
+        text-align: center;
+    }
+
+}
+
+.card .badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 9px 12px;
+    background: #FEF3C6;
+    border-radius: 1000px;
+font-weight: 500;
+font-size: 14px;
+line-height: 19px;
+text-align: center;
+color: #BB4D00;
 
 
 }
