@@ -1,27 +1,57 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import ProductCard from './ProductCard/ProductCard';
 
-const Product = ({ProductPromise}) => {
-    console.log(ProductPromise);
-    const Product = use(ProductPromise);
-    
-    return (
-        <div className='w-[1200px] mx-auto pt-[120px] pb-[120px]'> 
-        <div className="title-area">
-                <h2 className="sec-title">Premium Digital Tools</h2>
-                
-                <p className="sec-text">Choose from our curated collection of premium digital products designed to boost your productivity and creativity.</p>
-                </div>
-                 
+const Product = ({ ProductPromise }) => {
+  const productData = use(ProductPromise); // assume array of products
 
-            {
-                <ProductCard product={Product}></ProductCard>
-            }
-       
-        
-         
-        </div>
-    );
+  const [selectedType, setSelectedType] = useState("available");
+  const [selectedCart, setSelectedCart] = useState([]);
+
+  // Filter products for Available / Selected tab
+  const displayedProducts =
+    selectedType === "available"
+      ? productData.filter(p => !selectedCart.some(c => c.id === p.id))
+      : selectedCart;
+
+  return (
+    <div className='w-[1200px] mx-auto pt-[120px] pb-[120px]'> 
+      <div className="title-area">
+        <h2 className="sec-title">Premium Digital Tools</h2>
+        <p className="sec-text">
+          Choose from our curated collection of premium digital products designed to boost your productivity and creativity.
+        </p>
+      </div>
+
+      {/* Toggle Buttons */}
+      <div className='button-area flex gap-4 w-[248px] mx-auto items-center my-6'>
+        <button
+          onClick={() => setSelectedType("available")}
+          className={`btn ${selectedType === "available" ? "bg-[#E7FE29]" : ""}`}
+        >
+          Available
+        </button>
+
+        <button
+          onClick={() => setSelectedType("selected")}
+          className={`btn ${selectedType === "selected" ? "bg-[#E7FE29]" : ""}`}
+        >
+          Selected ({selectedCart.length})
+        </button>
+      </div>
+
+      {/* Product Grid */}
+      <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+        {displayedProducts.map(product => (
+          <ProductCard 
+            key={product.id}
+            product={product}
+            selectedCart={selectedCart}
+            setSelectedCart={setSelectedCart}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Product;

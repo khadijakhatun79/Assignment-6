@@ -85,11 +85,19 @@ body {
     padding: 9px 12px;
     background: #FEF3C6;
     border-radius: 1000px;
-font-weight: 500;
-font-size: 14px;
-line-height: 19px;
-text-align: center;
-color: #BB4D00;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    color: #BB4D00;
 
+
+}
+
+.button-area {
+    padding: 4px;
+    background: #FFFFFF;
+    border: 1px solid #F6F6F6;
+    border-radius: 100px;
 
 }
