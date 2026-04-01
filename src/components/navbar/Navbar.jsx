@@ -11,7 +11,7 @@ import logo from "../../assets/logo.svg"
   { id: 5, name: "FAQ", path: "/faq" }
 ];
 
-const Navbar = () => {
+const Navbar = ({ cartCount, toggleView }) => {
    const [open, setOpen] = useState(false);
 
    const links =  navigationData.map(route => <Link key={route.id}  route={route}></Link>)
@@ -41,7 +41,11 @@ const Navbar = () => {
            </ul>
   </div>
   <div className="navbar-end gap-2"> 
-    <a href='#' className="btn"> <span className='flex items-center gap-2 mr-2'><ShoppingBag className='text-sm'></ShoppingBag> Login</span></a>
+    // <a href='#' className="btn"> <span className='flex items-center gap-2 mr-2'><ShoppingBag className='text-sm'></ShoppingBag> Login</span></a>
+
+     <button onClick={() => toggleView("cart")}>
+          🛒 Cart ({cartCount})
+        </button>
     <a href='#' className="th-btn">Get Started</a>
   </div>
 </div>

@@ -3,7 +3,7 @@ import DaisyPricing from '../DaisyPricing/DaisyPricing';
 
 const PricingOptions = ({pricingPromise}) => {
     const pricingData = use(pricingPromise);
-    console.log(pricingData);
+   
     return (
         <div className='w-[1200px] mx-auto pt-[120px] pb-[120px]'>
             <div className="title-area">

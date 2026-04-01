@@ -2,7 +2,7 @@ import React from 'react';
 import Features from './Features';
 
 
-const Card = ({ product }) => {
+const Card = ({ product, addToCart }) => {
      const { features} = product; 
     return ( <div className="card w-96 bg-base-100 shadow-sm">
         <div className="card-body">
@@ -22,7 +22,9 @@ const Card = ({ product }) => {
            
             </ul>
             <div className="mt-6">
-            <button className="th-btn w-full">Buy Now</button>
+          
+             <button className='th-btn w-full' onClick={() => addToCart(product)}>Buy Now</button>
+             
             </div>
         </div>
         </div>
