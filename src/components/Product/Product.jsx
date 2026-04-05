@@ -1,20 +1,16 @@
 import React, { use, useState } from 'react';
 import ProductCard from './ProductCard/ProductCard';
 
-const Product = ({ ProductPromise }) => {
-  const productData = use(ProductPromise); // assume array of products
+const Product = ({ ProductPromise, addToCart }) => {
+  const productData = use(ProductPromise);
 
   const [selectedType, setSelectedType] = useState("available");
-  const [selectedCart, setSelectedCart] = useState([]);
 
-  // Filter products for Available / Selected tab
   const displayedProducts =
-    selectedType === "available"
-      ? productData.filter(p => !selectedCart.some(c => c.id === p.id))
-      : selectedCart;
+    selectedType === "available" ? productData : [];
 
   return (
-    <div className='w-[1200px] mx-auto pt-[120px] pb-[120px]'> 
+    <div className='w-[1200px] mx-auto pt-[120px] pb-[120px]'>
       <div className="title-area">
         <h2 className="sec-title">Premium Digital Tools</h2>
         <p className="sec-text">
@@ -22,7 +18,6 @@ const Product = ({ ProductPromise }) => {
         </p>
       </div>
 
-      {/* Toggle Buttons */}
       <div className='button-area flex gap-4 w-[248px] mx-auto items-center my-6'>
         <button
           onClick={() => setSelectedType("available")}
@@ -30,24 +25,14 @@ const Product = ({ ProductPromise }) => {
         >
           Available
         </button>
-
-        <button
-          onClick={() => setSelectedType("selected")}
-          className={`btn ${selectedType === "selected" ? "bg-[#E7FE29]" : ""}`}
-        >
-          Selected ({selectedCart.length})
+        <button className='btn' disabled>
+          Selected (0)
         </button>
       </div>
 
-      {/* Product Grid */}
       <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
         {displayedProducts.map(product => (
-          <ProductCard 
-            key={product.id}
-            product={product}
-            selectedCart={selectedCart}
-            setSelectedCart={setSelectedCart}
-          />
+          <ProductCard key={product.id} product={product} addToCart={addToCart} />
         ))}
       </div>
     </div>
