@@ -1,29 +1,33 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const ProductCard = ({ product, addToCart }) => {
-  const [isSelected, setIsSelected] = useState(false);
+  const [added, setAdded] = useState(false);
 
-  const handleAdd = () => {
+  const handleAddToCart = () => {
     addToCart(product);
-    setIsSelected(true);
+    setAdded(true);
+    toast.success(`${product.name} added to cart!`);
+    setTimeout(() => setAdded(false), 1500);
   };
 
   return (
-    <div className="card w-96 bg-base-100 shadow-sm">
-      <span className="badge badge-warning">{product.tag}</span>
-      <img src={product.icon} alt={product.name} className="mb-3" />
-      <h2 className='text-3xl font-bold mb-2'>{product.name}</h2>
-      <p className='mb-2'>{product.description}</p>
-      <span className="text-xl">${product.price}</span>
-      <ul className="mt-6 flex flex-col gap-2 text-xs">
-        {product.features?.map((f, i) => <li key={i}>• {f}</li>)}
+    <div className={`border p-4 rounded shadow ${added ? '' : ''}`}>
+      <img src={product.icon} alt={product.name} className="w-16 h-16 mb-2"/>
+      <h3 className="font-semibold">{product.name}</h3>
+      <p className="text-sm mb-2">{product.description}</p>
+      <p className="font-bold">${product.price} / {product.period}</p>
+      <span className={`tag ${product.tagType}`}>{product.tag}</span>
+
+      <ul className="mt-2 mb-4 list-disc list-inside">
+        {product.features.map((f, i) => <li key={i}>{f}</li>)}
       </ul>
+
       <button 
-        className='th-btn w-full mt-4' 
-        disabled={isSelected} 
-        onClick={handleAdd}
+        onClick={handleAddToCart} 
+        className={`btn w-full ${added ? 'bg-green-500 text-white' : 'bg-yellow-400'}`}
       >
-        {isSelected ? "Added to cart" : "Buy Now"}
+        Buy Now
       </button>
     </div>
   );

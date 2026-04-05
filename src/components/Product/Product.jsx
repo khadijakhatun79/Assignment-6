@@ -1,20 +1,19 @@
 import React, { use, useState } from 'react';
 import ProductCard from './ProductCard/ProductCard';
+import SelectedCart from '../SelectedCart/SelectedCart';
 
-const Product = ({ ProductPromise, addToCart }) => {
+const Product = ({ ProductPromise, addToCart, cart }) => {
   const productData = use(ProductPromise);
-
   const [selectedType, setSelectedType] = useState("available");
 
-  const displayedProducts =
-    selectedType === "available" ? productData : [];
+  const displayedProducts = selectedType === "available" ? productData : [];
 
   return (
     <div className='w-[1200px] mx-auto pt-[120px] pb-[120px]'>
       <div className="title-area">
         <h2 className="sec-title">Premium Digital Tools</h2>
         <p className="sec-text">
-          Choose from our curated collection of premium digital products designed to boost your productivity and creativity.
+          Choose from our curated collection of premium digital products.
         </p>
       </div>
 
@@ -25,16 +24,23 @@ const Product = ({ ProductPromise, addToCart }) => {
         >
           Available
         </button>
-        <button className='btn' disabled>
-          Selected (0)
+        <button
+          onClick={() => setSelectedType("selected")}
+          className={`btn ${selectedType === "selected" ? "bg-[#E7FE29]" : ""}`}
+        >
+          Cart ({cart.length})
         </button>
       </div>
 
-      <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
-        {displayedProducts.map(product => (
-          <ProductCard key={product.id} product={product} addToCart={addToCart} />
-        ))}
-      </div>
+      {selectedType === "available" ? (
+        <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+          {displayedProducts.map(product => (
+            <ProductCard key={product.id} product={product} addToCart={addToCart} />
+          ))}
+        </div>
+      ) : (
+        <SelectedCart cart={cart} removeItem={(id) => addToCart({ type: 'remove', id })} checkout={() => addToCart({ type: 'checkout' })}/>
+      )}
     </div>
   );
 };
