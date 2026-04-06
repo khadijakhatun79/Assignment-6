@@ -8,6 +8,9 @@ import PricingOptions from './components/PricingOptions/PricingOptions';
 import Footer from './components/Footer/Footer';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Counter from './components/Counter/Counter';
+import Process from './components/Process/Process';
+import Cta from './components/Cta/Cta';
 
 // Fetch products 
 const fetchProduct = async () => {
@@ -49,6 +52,7 @@ function App() {
       <ToastContainer position="top-right" autoClose={2000} />
 
       <Banner />
+      <Counter></Counter>
 
       {view === "products" && (
         <Suspense fallback={<span className="loading loading-dots loading-xl"></span>}>
@@ -60,9 +64,13 @@ function App() {
         <SelectedCart cart={cart} removeItem={(id) => addToCart({ type: 'remove', id })} checkout={() => addToCart({ type: 'checkout' })} />
       )}
 
+      <Process></Process>
+
       <Suspense fallback={<span className="loading loading-ring loading-lg"></span>}>
         <PricingOptions pricingPromise={pricingPromise} />
       </Suspense>
+
+      <Cta></Cta>
 
       <Footer />
     </>

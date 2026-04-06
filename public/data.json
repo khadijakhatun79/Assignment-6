@@ -3,8 +3,8 @@
     "id": 1,
     "productName": "AI Writing Pro",
     "description": "Generate high-quality content, blogs, and marketing copy in seconds with advanced AI.",
-    "price": "$29/mo",
-    "period": "monthly",
+    "price": "29",
+    "period": "/mo",
     "tag": "Best Seller",
     "tagType": "best",
     "features": [
@@ -18,7 +18,7 @@
     "id": 2,
     "productName": "Design Templates Pack",
     "description": "2000+ premium templates for social media, presentations, and marketing materials.",
-    "price": "$49/one-time",
+    "price": "49",
     "period": "one-time",
     "tag": "Popular",
     "tagType": "popular",
@@ -33,8 +33,8 @@
     "id": 3,
     "productName": "Premium Stock Assets",
     "description": "Access millions of royalty-free photos, videos, and graphics for your projects.",
-    "price": "$19/mo",
-    "period": "monthly",
+    "price": "19",
+    "period": "/mo",
     "tag": "New",
     "tagType": "new",
     "features": [
@@ -49,7 +49,7 @@
     "productName": "Automation Toolkit",
     "description": "Automate repetitive tasks and streamline your workflow with powerful tools.",
     "price": 79,
-    "period": "monthly",
+    "period": "/mo",
     "tag": "Popular",
     "tagType": "popular",
     "features": [
@@ -79,7 +79,7 @@
     "productName": "Social Media Content Kit",
     "description": "Complete toolkit for creating engaging social media content across all platforms.",
     "price": 39,
-    "period": "monthly",
+    "period": "mo",
     "tag": "Best Seller",
     "tagType": "best",
     "features": [

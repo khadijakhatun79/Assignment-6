@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from './Link';
-import { Menu, X, ShoppingBag } from 'lucide-react';
+import { Menu, X, ShoppingBag, ShoppingCart } from 'lucide-react';
 import logo from "../../assets/logo.svg"
 
 const navigationData = [
@@ -34,10 +34,10 @@ const Navbar = ({ cartCount, toggleView }) => {
         </div>
 
         <div className="navbar-end gap-2">
-          <button className="" onClick={() => toggleView("cart")}>
-            <ShoppingBag className='text-sm' /> <span className='cart'>{cartCount}</span> 
+          <button className="relative" onClick={() => toggleView("cart")}>
+            <ShoppingCart className='text-sm' /> <span className='absolute -top-4 -right-2 bg-[#4F39F6] text-white text-xs px-2 py-1 rounded-full'>{cartCount}</span> 
           </button>
-          <a href='#' className="btn">Login</a>
+          <a href='#' className="ml-[16px] mr-[16px]">Login</a>
           <a href='#' className="th-btn">Get Started</a>
         </div>
       </div>

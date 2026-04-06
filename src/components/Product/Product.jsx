@@ -10,23 +10,21 @@ const Product = ({ ProductPromise, addToCart, cart }) => {
 
   return (
     <div className='w-[1200px] mx-auto pt-[120px] pb-[120px]'>
-      <div className="title-area">
-        <h2 className="sec-title">Premium Digital Tools</h2>
-        <p className="sec-text">
-          Choose from our curated collection of premium digital products.
-        </p>
+      <div className="w-[550px] mx-auto text-center">
+        <h2 className="text-[48px] font-bold text-black">Premium Digital Tools</h2>
+        <p className="text-[#627382] px-2">Choose from our curated collection of premium digital products designed to boost your productivity and creativity. </p>
       </div>
 
-      <div className='button-area flex gap-4 w-[248px] mx-auto items-center my-6'>
+      <div className='button-area flex justify-center gap-6 w-[290px] mx-auto items-center my-6'>
         <button
           onClick={() => setSelectedType("available")}
-          className={`btn ${selectedType === "available" ? "bg-[#E7FE29]" : ""}`}
+          className={`${selectedType === "available" ? "tab rounded-full w-40 h-15 py-4 text-white font-bold bg-[linear-gradient(89.15deg,#4F39F6_-30.76%,#9514FA_99.27%)]" : ""}`}
         >
-          Available
+          Products
         </button>
         <button
           onClick={() => setSelectedType("selected")}
-          className={`btn ${selectedType === "selected" ? "bg-[#E7FE29]" : ""}`}
+          className={` ${selectedType === "selected" ? "tab rounded-full w-40 h-15 py-4 text-white font-bold bg-[linear-gradient(89.15deg,#4F39F6_-30.76%,#9514FA_99.27%)]" : ""}`}
         >
           Cart ({cart.length})
         </button>

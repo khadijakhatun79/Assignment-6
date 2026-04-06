@@ -3,9 +3,9 @@ import React from 'react';
 
 const Features = ({feature}) => {
     return (
-        <li className='flex text-[16px]'>
-             <Check  className='mr-2'></Check>{feature}
-            </li>
+        <li className='flex gap-4  text-zinc-500'>
+            <span class="text-green-600"><Check  className='mr-2'></Check></span> {feature}
+            </li> 
        
     );
 };
