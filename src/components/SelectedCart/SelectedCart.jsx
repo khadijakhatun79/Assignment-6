@@ -40,9 +40,12 @@ const total = cart.reduce((sum, item) => {
             </div>
           ))}
 
+          <div className="items-center justify-between flex gap-3">
           <h2 className="text-[20px] font-bold mt-6">
-            Total: ${total}
+            Total: 
           </h2>
+          <span className="total-price">${total}</span>
+          </div>
 
           <button 
             onClick={checkout}
