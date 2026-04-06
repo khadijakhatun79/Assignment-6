@@ -24,7 +24,7 @@ const SelectedCart = ({ cart, removeItem, checkout }) => {
           {cart.map((product) => (
             <div key={product.id} className="flex justify-between items-center p-4 border rounded">
               <div className="flex items-center gap-3">
-                <img src={product.icon} alt={product.name} className="w-12 h-12"/>
+                      <div className='icon'><img src={product.icon} alt={product.name} className=""/></div>
                 <span>{product.name}</span>
               </div>
               <span>${product.price}</span>

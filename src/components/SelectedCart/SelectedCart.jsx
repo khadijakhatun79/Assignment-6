@@ -1,39 +1,58 @@
-import React from 'react';
-import { toast } from 'react-toastify';
+import { ShoppingCart } from "lucide-react";
+import React from "react";
 
 const SelectedCart = ({ cart, removeItem, checkout }) => {
-  const handleRemove = (id) => {
-    removeItem(id);
-    toast.info("Product removed from cart!");
-  };
-
-  const handleCheckout = () => {
-    checkout();
-    toast.success("Checkout successful!");
-  };
+const total = cart.reduce((sum, item) => {
+  return sum + parseFloat(item.price);
+}, 0);
 
   return (
-    <div className="w-[1200px] mx-auto py-16">
+    <div className="w-[800px] mx-auto">
+
       {cart.length === 0 ? (
-        <div className="h-[400px] flex flex-col justify-center items-center gap-4">
-          <h2 className="font-semibold text-xl">No Product selected yet</h2>
-          <p>Go to Products tab to select Product</p>
+        <div className="h-80 flex flex-col text-center justify-center items-center false">
+        <div class="">
+        <ShoppingCart className="h-40 w-40 text-gray-300 mb-4"></ShoppingCart>
+        </div>
+         <p class="text-3xl font-bold text-center">Your card is empty!!</p>
         </div>
       ) : (
-        <div className="space-y-4">
-          {cart.map((product) => (
-            <div key={product.id} className="flex justify-between items-center p-4 border rounded">
-              <div className="flex items-center gap-3">
-                <img src={product.icon} alt={product.name} className="w-12 h-12"/>
-                <span>{product.name}</span>
+        <>
+          {cart.map(item => (
+            <div key={item.id} className="flex justify-between items-center p-4 border mb-3 rounded">
+
+              <div className="card items-center flex gap-3">
+              
+               <div className="icon"> <img src={item.icon} alt="" className="w-10" /></div>
+                <div>
+                <span className="block">{item.productName}</span>
+                        <span>${item.price}</span> </div>
               </div>
-              <span>${product.price}</span>
-              <button onClick={() => handleRemove(product.id)} className="btn btn-error">Remove</button>
+
+      
+
+              <button 
+                onClick={() => removeItem(item.id)}
+                className="btn btn-error"
+              >
+                Remove
+              </button>
             </div>
           ))}
-          <button onClick={handleCheckout} className="th-btn w-full mt-4">Proceed to Checkout</button>
-        </div>
+
+          <h2 className="text-[20px] font-bold mt-6">
+            Total: ${total}
+          </h2>
+
+          <button 
+            onClick={checkout}
+            className="th-btn w-full mt-4"
+          >
+            Proceed to Checkout
+          </button>
+        </>
       )}
+
     </div>
   );
 };

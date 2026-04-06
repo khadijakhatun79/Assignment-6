@@ -60,6 +60,8 @@ body {
 .card {
     position: relative;
     z-index: 2;
+    flex-direction: row; 
+
 }
 
 .card .icon {

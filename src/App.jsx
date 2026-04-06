@@ -3,22 +3,19 @@ import './App.css';
 import Navbar from './components/navbar/Navbar';
 import Banner from './components/Banner/Banner';
 import Product from './components/Product/Product';
-import SelectedCart from './components/SelectedCart/SelectedCart'; 
+import SelectedCart from './components/SelectedCart/SelectedCart';
 import PricingOptions from './components/PricingOptions/PricingOptions';
 import Footer from './components/Footer/Footer';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Counter from './components/Counter/Counter';
-import Process from './components/Process/Process';
 import Cta from './components/Cta/Cta';
+import Process from './components/Process/Process';
 
-// Fetch products 
 const fetchProduct = async () => {
   const res = await fetch("/data.json");
   return res.json();
 };
 
-// Fetch pricing data 
 const pricingPromise = fetch('pricingData.json').then(res => res.json());
 
 function App() {
@@ -27,50 +24,62 @@ function App() {
 
   const ProductPromise = fetchProduct();
 
+  // ✅ ADD
   const addToCart = (product) => {
-    if (product.type === 'remove') {
-      setCart(prev => prev.filter(item => item.id !== product.id));
-      toast.info("Product removed from cart!");
-      return;
-    }
-    if (product.type === 'checkout') {
-      setCart([]);
-      toast.success("Checkout successful!");
-      return;
-    }
     if (!cart.find(item => item.id === product.id)) {
       setCart(prev => [...prev, product]);
       toast.success(`${product.name} added to cart!`);
     } else {
-      toast.info(`${product.name} already in cart!`);
+      toast.info(`${product.name} already added!`);
     }
+  };
+
+  // ✅ REMOVE
+  const removeItem = (id) => {
+    setCart(prev => prev.filter(item => item.id !== id));
+    toast.info("Product removed!");
+  };
+
+  // ✅ CHECKOUT
+  const checkout = () => {
+    setCart([]);
+    toast.success("Checkout successful!");
   };
 
   return (
     <>
       <Navbar cartCount={cart.length} toggleView={setView} />
-      <ToastContainer position="top-right" autoClose={2000} />
+      <ToastContainer />
 
       <Banner />
-      <Counter></Counter>
 
       {view === "products" && (
-        <Suspense fallback={<span className="loading loading-dots loading-xl"></span>}>
-          <Product ProductPromise={ProductPromise} addToCart={addToCart} cart={cart} />
+        <Suspense fallback={<span className="loading loading-dots"></span>}>
+          <Product 
+            ProductPromise={ProductPromise} 
+            addToCart={addToCart} 
+            cart={cart}
+            removeItem={removeItem}
+            checkout={checkout}
+          />
         </Suspense>
       )}
 
       {view === "cart" && (
-        <SelectedCart cart={cart} removeItem={(id) => addToCart({ type: 'remove', id })} checkout={() => addToCart({ type: 'checkout' })} />
+        <SelectedCart 
+          cart={cart} 
+          removeItem={removeItem} 
+          checkout={checkout}
+        />
       )}
+<Process></Process>
 
-      <Process></Process>
 
-      <Suspense fallback={<span className="loading loading-ring loading-lg"></span>}>
+      <Suspense fallback={<span className="loading loading-ring"></span>}>
         <PricingOptions pricingPromise={pricingPromise} />
       </Suspense>
-
       <Cta></Cta>
+      
 
       <Footer />
     </>
